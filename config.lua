@@ -2,6 +2,7 @@ hooksecurefunc(AddonCompartmentFrame, "RegisterAddons", function()
     DBisShown = DBisShown == nil and true or DBisShown
     AddonCompartmentButtonsFrame:Init()
     AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
+    AddonCompartmentButtonsFrame.Drag:SetArrow(DBisShown)
 end)
 
 AddonCompartmentButtonsMixin = {}
@@ -64,9 +65,20 @@ end
 
 
 AddonCompartmentButtonsDragMixin = {}
+
+function AddonCompartmentButtonsDragMixin:OnLoad()
+    TooltipBackdropTemplateMixin.TooltipBackdropOnLoad(self)
+    self.Arrow:SetRotation(math.pi/2)
+end
 function AddonCompartmentButtonsDragMixin:OnClick()
     DBisShown = not DBisShown
-    AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
+    self:SetArrow(DBisShown)
+end
+
+function AddonCompartmentButtonsDragMixin:SetArrow(state)
+    AddonCompartmentButtonsFrame.Contents:SetShown(state)
+   local rotate = DBisShown and math.pi/2 or -math.pi/2
+   self.Arrow:SetRotation(rotate)
 end
 
 

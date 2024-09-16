@@ -34,29 +34,31 @@
 			<Anchor point="TOPRIGHT"/>
 		</Anchors>
 		<Frames>
-			<Frame parentKey="Contents"  inherits="TooltipBackdropTemplate" enableMouse="true" >
+			<Frame parentKey="Contents" inherits="TooltipBackdropTemplate" enableMouse="true" >
 				<Anchors>
 					<Anchor point="TOPLEFT" x="-4" y="4"/>
 					<Anchor point="BOTTOMRIGHT" x="4" y="-4"/>
 				</Anchors>
 			</Frame>
-		 	<Button parentKey="Drag" mixin="AddonCompartmentButtonsDragMixin" >
-				<Size x="10" y="20"/>
+		 	<Button parentKey="Drag" inherits="TooltipBackdropTemplate" mixin="AddonCompartmentButtonsDragMixin" >
+				<Size x="22" y="20"/>
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPRIGHT" x="4" y="0"/>
-					<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="4" y="0"/>
+					<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPRIGHT" x="2" y="4"/>
+					<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="2" y="-4"/>
 				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
-						<Texture parentKey="Icon" setAllPoints="true">
-							<Color r=".1" g=".1" b=".1" a="1" />
+						<Texture parentKey="Arrow" atlas="auctionhouse-ui-sortarrow" useAtlasSize="true">
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
 						</Texture>
 					</Layer>
 				</Layers>
 				<Scripts>
+					<OnLoad method="OnLoad"/>
 					<OnClick method="OnClick"/>
 				</Scripts>
-				<NormalTexture parentKey="NormalTexture" atlas="auctionhouse-rowstripe-1" setAllPoints="true"/>
 			</Button>
 		</Frames>
 		<Scripts>
