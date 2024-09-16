@@ -2,6 +2,7 @@
 ## Title: Addon Compartment Buttons
 ## Notes: Show addons that are registered in the Addon Compartment in a movable Icon bar
 ## Version: @project-version@
+## SavedVariables: DBisShown 
 ## Author: Muhmiauwau
 ## X-Curse-Project-ID: 1104030
 

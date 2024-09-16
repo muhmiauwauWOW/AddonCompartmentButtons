@@ -1,5 +1,7 @@
 hooksecurefunc(AddonCompartmentFrame, "RegisterAddons", function()
+    DBisShown = DBisShown == nil and true or DBisShown
     AddonCompartmentButtonsFrame:Init()
+    AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
 end)
 
 AddonCompartmentButtonsMixin = {}
@@ -63,7 +65,8 @@ end
 
 AddonCompartmentButtonsDragMixin = {}
 function AddonCompartmentButtonsDragMixin:OnClick()
-    AddonCompartmentButtonsFrame.Contents:SetShown(not AddonCompartmentButtonsFrame.Contents:IsShown())
+    DBisShown = not DBisShown
+    AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
 end
 
 
