@@ -1,0 +1,9 @@
+﻿## Interface: 110002
+## Title: Addon Compartment Buttons
+## Notes: Show addons that are registerd in the Addon Compartment in a movabe Icon bar
+## Version: @project-version@
+## Author: Muhmiauwau
+## X-Curse-Project-ID: 
+
+config.lua
+frames.xml
