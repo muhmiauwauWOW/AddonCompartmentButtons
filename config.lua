@@ -1,4 +1,4 @@
-hooksecurefunc(AddonCompartmentFrame, "RegisterAddons", function()
+hooksecurefunc(AddonCompartmentFrame, "UpdateDisplay", function()
     DBisShown = DBisShown == nil and true or DBisShown
     AddonCompartmentButtonsFrame:Init()
     AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
@@ -15,8 +15,6 @@ function AddonCompartmentButtonsMixin:OnLoad()
     self.rows = 2
     self.inset = 4
     self.pool = CreateFramePool("Button", self.Contents, "AddonCompartmentButtonsButtonFrame");
-    self.pool:ReleaseAll();
-
     self:SetWidth(self.iconSpace * self.cols+ (self.inset*2))
     self:SetHeight(self.iconSpace * self.rows + (self.inset*2))
 
@@ -41,6 +39,7 @@ function AddonCompartmentButtonsMixin:getPos(type, index)
 end
 
 function AddonCompartmentButtonsMixin:Init()
+    self.pool:ReleaseAll();
     local registeredAddons =  AddonCompartmentFrame.registeredAddons
 
     local width = #registeredAddons < self.cols and #registeredAddons or self.cols
@@ -48,7 +47,6 @@ function AddonCompartmentButtonsMixin:Init()
     self:SetWidth(self.iconSpace * width)
     self:SetHeight(self.iconSpace * self.rows)
 
-    -- DevTool:AddData(registeredAddons, "registeredAddons")
     for key, value in pairs(registeredAddons) do
         local texture = value.icon or [[Interface\ICONS\INV_Misc_QuestionMark]]
         local iconButton = self.pool:Acquire()
@@ -84,14 +82,18 @@ end
 
 AddonCompartmentButtonsButtonMixin = {}
 
-function AddonCompartmentButtonsButtonMixin:OnLoad()
-end
-
 function AddonCompartmentButtonsButtonMixin:OnClick(button)
+    if not self.data.func then  return end
     self.data.func(nil, { buttonName = button }, nil)
 end
 
 function AddonCompartmentButtonsButtonMixin:OnEnter()
+    if self.data.funcOnEnter then 
+        do
+            self.data.funcOnEnter(self)
+        end
+        return
+    end
     if not self.data.text then return end
     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
 	GameTooltip:AddLine(self.data.text)
@@ -100,5 +102,11 @@ end
 
 
 function AddonCompartmentButtonsButtonMixin:OnLeave()
+    if self.data.funcOnLeave then 
+        do
+            self.data.funcOnLeave(self)
+        end
+        return
+    end
     GameTooltip:Hide()
 end
