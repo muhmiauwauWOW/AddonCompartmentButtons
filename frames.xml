@@ -19,10 +19,10 @@
 	</Button>
 
 
-	<Frame name="AddonCompartmentButtonsFrame" hidden="true"  mixin="AddonCompartmentButtonsMixin" >
+	<Frame name="AddonCompartmentButtonsFrame" hidden="true" toplevel="true" mixin="AddonCompartmentButtonsMixin" >
 		<Size x="0" y="0"/>
 		<Anchors>
-			<Anchor point="TOPRIGHT"/>
+			<Anchor point="CENTER"/>
 		</Anchors>
 		<Frames>
 			<Frame parentKey="Contents" inherits="TooltipBackdropTemplate" enableMouse="true" >
