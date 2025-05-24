@@ -33,10 +33,6 @@
 			</Frame>
 		 	<Button parentKey="Drag" inherits="TooltipBackdropTemplate" mixin="AddonCompartmentButtonsDragMixin" >
 				<Size x="22" y="20"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeKey="$parent" relativePoint="TOPRIGHT" x="2" y="4"/>
-					<Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMRIGHT" x="2" y="-4"/> 
-				</Anchors>
 				<Layers>
 					<Layer level="OVERLAY">
 						<Texture parentKey="Arrow" atlas="auctionhouse-ui-sortarrow" useAtlasSize="true">

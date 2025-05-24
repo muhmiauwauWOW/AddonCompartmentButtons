@@ -1,5 +1,6 @@
 hooksecurefunc(AddonCompartmentFrame, "UpdateDisplay", function()
     DBisShown = DBisShown == nil and true or DBisShown
+    DBisRIGHT = DBisRIGHT == nil and true or DBisRIGHT
     AddonCompartmentButtonsFrame:Init()
     AddonCompartmentButtonsFrame.Contents:SetShown(DBisShown)
     AddonCompartmentButtonsFrame.Drag:SetArrow(DBisShown)
@@ -15,7 +16,7 @@ function AddonCompartmentButtonsMixin:OnLoad()
     self.rows = 2
     self.inset = 4
     self.pool = CreateFramePool("Button", self.Contents, "AddonCompartmentButtonsButtonFrame");
-    self:SetWidth(self.iconSpace * self.cols+ (self.inset*2))
+    self:SetWidth(self.iconSpace * self.cols + (self.inset*2))
     self:SetHeight(self.iconSpace * self.rows + (self.inset*2))
 
     local dragarea = self.Drag
@@ -58,6 +59,7 @@ function AddonCompartmentButtonsMixin:Init()
         iconButton:Show()
     end
 
+    self.Drag:SetAnchor(DBisRIGHT)
     self:Show()
 end
 
@@ -68,7 +70,13 @@ function AddonCompartmentButtonsDragMixin:OnLoad()
     TooltipBackdropTemplateMixin.TooltipBackdropOnLoad(self)
     self.Arrow:SetRotation(math.pi/2)
 end
-function AddonCompartmentButtonsDragMixin:OnClick()
+function AddonCompartmentButtonsDragMixin:OnClick(button, bla,blub)
+    if IsControlKeyDown() then 
+        DBisRIGHT = not DBisRIGHT
+        self:SetAnchor(DBisRIGHT)
+        return
+    end 
+
     DBisShown = not DBisShown
     self:SetArrow(DBisShown)
 end
@@ -77,6 +85,18 @@ function AddonCompartmentButtonsDragMixin:SetArrow(state)
     AddonCompartmentButtonsFrame.Contents:SetShown(state)
    local rotate = DBisShown and math.pi/2 or -math.pi/2
    self.Arrow:SetRotation(rotate)
+end
+
+
+function AddonCompartmentButtonsDragMixin:SetAnchor(state)
+    self:ClearAllPoints()
+    if state then 
+        self:SetPoint("TOPRIGHT", self:GetParent(), "TOPLEFT", -2, 4)
+        self:SetPoint("BOTTOMRIGHT", self:GetParent(), "BOTTOMLEFT", -2, -4)
+    else
+        self:SetPoint("TOPLEFT", self:GetParent(), "TOPRIGHT", 2, 4)
+        self:SetPoint("BOTTOMLEFT", self:GetParent(), "BOTTOMRIGHT", 2, -4)
+    end
 end
 
 
