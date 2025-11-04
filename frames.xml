@@ -19,7 +19,7 @@
 	</Button>
 
 
-	<Frame name="AddonCompartmentButtonsFrame" hidden="true" toplevel="true" mixin="AddonCompartmentButtonsMixin" >
+	<Frame name="AddonCompartmentButtonsFrame" hidden="true" frameStrata="HIGH" mixin="AddonCompartmentButtonsMixin" >
 		<Size x="0" y="0"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
