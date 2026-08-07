@@ -1,4 +1,4 @@
-﻿## Interface: 120007
+﻿## Interface: 120100, 120007
 ## Title: Addon Compartment Buttons
 ## Notes: Show addons that are registered in the Addon Compartment in a movable Icon bar
 ## Version: @project-version@
